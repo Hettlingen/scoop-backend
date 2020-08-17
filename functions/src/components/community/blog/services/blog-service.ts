@@ -1,6 +1,7 @@
 import {Blog} from "../model/blog";
 import {BlogDatabseService} from "./database/blog-databse-service";
 import {Post} from "../model/post";
+import * as uuidGenerator from "uuid/v4";
 
 export class BlogService {
 
@@ -24,6 +25,33 @@ export class BlogService {
         } catch(error){
             throw new Error('[myfarmer] BlogService.getPost - Error reading Post with uuid '
                 + uuidPost + ', error: ' +
+                + error);
+        }
+    }
+
+    static async createPost(post: Post): Promise<Post> {
+        console.log('Post: ' + JSON.stringify(post));
+        console.log('START: BlogService.createPost');
+
+        try {
+            return await BlogDatabseService.createPost(
+                uuidGenerator(),
+                post);
+        } catch(error){
+            throw new Error('[myfarmer] BlogService.createPost - Error creating Post for Blog: '
+                + post.blog.uuid + ', error: ' +
+                + error);
+        }
+    }
+
+    static async updatePost(post: Post): Promise<Post> {
+        console.log('START: BlogService.createPost: ' + post.blog.uuid);
+
+        try {
+            return await BlogDatabseService.updatePost(post);
+        } catch(error){
+            throw new Error('[myfarmer] BlogService.updatePost - Error creating Post for Blog: '
+                + post.blog.uuid + ', error: ' +
                 + error);
         }
     }

@@ -5,8 +5,8 @@ export class Blog {
     public title!: string;
     public description!: string;
     public author!: string;  // should be an author
+    public listPost: Post[] = [];
     public dateCreated!: Date;
     public dateUpdated!: Date;
     public datePublished!: Date;
-    public listPost: Post[] = [];
 }

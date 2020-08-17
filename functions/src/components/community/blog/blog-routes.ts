@@ -22,5 +22,23 @@ export class BlogRoutes {
                 response.status(404).send("Post wasn't found: " + error)
             });
         })
+
+        app.route('/posts').post(async (request: Request, response: Response) => {
+            BlogService.createPost(request.body)
+                .then(function (post: Post) {
+                    response.status(200).send(post);
+                }).catch(function (error: any) {
+                response.status(404).send("Post wasn't created successful: " + error);
+            });
+        });
+
+        app.route('/posts').put(async (request: Request, response: Response) => {
+            BlogService.updatePost(request.body)
+                .then(function (post: Post) {
+                    response.status(200).send(post);
+                }).catch(function (error: any) {
+                response.status(404).send("Post wasn't updated successful: " + error);
+            });
+        });
     }
 }
