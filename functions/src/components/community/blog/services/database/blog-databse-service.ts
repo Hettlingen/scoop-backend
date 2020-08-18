@@ -74,13 +74,10 @@ export class BlogDatabseService {
     static async updatePost(post: Post): Promise<Post> {
         console.log('START: BlogDatabseService.updatePost');
 
-        const query = `INSERT INTO Post(uuid, title, content, duration) VALUES ('${post.uuid}', '${post.title}', '${post.content}', '${post.duration}')`;
+        const query = `UPDATE Post SET 'uuid' = '${post.uuid}', 'title' = '${post.title}', 'content' = '${post.content}', 'duration' = '${post.duration}'`;
 
         try {
             const uuidFromDb = await databaseBlog.query(query);
-
-            if (!uuidFromDb) throw new Error('[myfarmer] Error inserting post in database.');
-
             return uuidFromDb[0];
         } catch(error) {
             throw new Error('[myfarmer] Error execute insert-query post: ' + error);
@@ -90,7 +87,7 @@ export class BlogDatabseService {
     static async deletePost(uuidPost: string): Promise<boolean> {
         console.log('START: BlogDatabseService.deletePost');
 
-        const query = `DELETE FROM Post WHERE uuid = ${uuidPost}`;
+        const query = `DELETE FROM Post WHERE uuid = '${uuidPost}'`;
 
         try {
             await databaseBlog.query(query);
