@@ -55,4 +55,16 @@ export class BlogService {
                 + error);
         }
     }
+
+    static async deletePost(uuidPost: string): Promise<boolean> {
+        console.log('START: BlogService.deletePost: ' + uuidPost);
+
+        try {
+            return await BlogDatabseService.deletePost(uuidPost);
+        } catch(error){
+            throw new Error('[myfarmer] BlogService.updatePost - Error deleting Post: '
+                + uuidPost + ', error: ' +
+                + error);
+        }
+    }
 }

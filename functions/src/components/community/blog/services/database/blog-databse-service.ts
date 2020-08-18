@@ -86,4 +86,17 @@ export class BlogDatabseService {
             throw new Error('[myfarmer] Error execute insert-query post: ' + error);
         }
     }
+
+    static async deletePost(uuidPost: string): Promise<boolean> {
+        console.log('START: BlogDatabseService.deletePost');
+
+        const query = `DELETE FROM Post WHERE uuid = ${uuidPost}`;
+
+        try {
+            await databaseBlog.query(query);
+            return true;
+        } catch(error) {
+            throw new Error('[myfarmer] Error execute insert-query post: ' + error);
+        }
+    }
 }
