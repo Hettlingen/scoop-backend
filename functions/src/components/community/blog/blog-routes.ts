@@ -52,7 +52,7 @@ export class BlogRoutes {
                 .then(function (successful: boolean) {
                     response.status(200).send(successful);
                 }).catch(function (error: any) {
-                response.status(404).send("Post wasn't updated successful: " + error);
+                response.status(404).send("Post wasn't deleted successful: " + error);
             });
         });
     }
